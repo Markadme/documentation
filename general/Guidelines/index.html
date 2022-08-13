@@ -43,6 +43,16 @@
               <p class="caption"><span class="caption-text">General</span></p>
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Guidelines</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#project-structure">Project Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#naming">Naming</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#git-guidelines">Git guidelines</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Framework/">Framework</a>
                   </li>
@@ -76,7 +86,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="guidelines">Guidelines</h1>
+<h2 id="project-structure">Project Structure</h2>
+<pre><code>project
+│   README.md   
+|
+└── doc
+└── src
+|   |   __init__.py
+|   |
+│   └── nodes
+|       |   __init__.py
+|       |
+│       └── data_sources
+|       |   |   __init__.py
+|       |
+│       └── data_processors
+|       |   |   __init__.py
+|       |
+│       └── end_nodes
+|           |   __init__.py
+│   
+└── scripts
+└── launch
+└── (windows_scripts)
+└── testing
+</code></pre>
+<p><code>doc</code> contains all files related to the documentation (Readme) \
+<code>src</code> contains the actual project files. Everything in this folder is declared to a package by the <code>__init__.py</code> to allow a uniform import \
+<code>src/nodes</code> Contains all modules that can be connected through the framework \
+<code>src/nodes/data_sources</code> Contains all data sources \
+<code>src/nodes/data_processors</code> Contains all data processors \
+<code>src/nodes/end_nodes</code> Contains all end nodes \
+<code>scripts</code> Contains all scripts that can be executed with ros \
+<code>launch</code> Contains all launch scripts for ros \
+<code>windows_scripts</code>  Contains all scripts that can be executed in windows without ros \
+<code>testing</code> Contains all testcases</p>
+<h2 id="naming">Naming</h2>
+<h2 id="git-guidelines">Git guidelines</h2>
+<p>?</p>
+<h2 id="testing">Testing</h2>
+<p>?</p>
               
             </div>
           </div><footer>
