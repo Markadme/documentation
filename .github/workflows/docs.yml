@@ -19,4 +19,11 @@ jobs:
       run: |
         apt-get update
         apt-get install -y git
-        git clone --depth
+        git clone --depth 1 "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .
+      shell: bash
+ 
+    - name: Execute script to build our documentation and update pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: "docs/buildDocs.sh"
+      shell: bash
