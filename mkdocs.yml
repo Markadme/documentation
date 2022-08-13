@@ -1,11 +1,11 @@
-site_name: WordPressPCL
+site_name: documentation
 site_url: https://markadme.github.io/documentation/
 nav:
-    – Home: index.md
-    – Version 1.x:
-        – Types:
-            – Comments: v1/types/comments.md
-            – Posts: v1/types/posts.md
+    - Home: index.md
+    - Version 1.x:
+        - Types:
+            - Comments: v1/types/comments.md
+            - Posts: v1/types/posts.md
 
 
 theme: readthedocs
