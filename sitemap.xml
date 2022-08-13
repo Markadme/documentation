@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://markadme.github.io/documentation/</loc>
+         <loc>https://markadme.github.io/documentation/general/Framework/</loc>
          <lastmod>2022-08-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://markadme.github.io/documentation/v1/types/comments/</loc>
+         <loc>https://markadme.github.io/documentation/general/Guidelines/</loc>
          <lastmod>2022-08-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://markadme.github.io/documentation/v1/types/posts/</loc>
+         <loc>https://markadme.github.io/documentation/vehicle-navigation/Overview/</loc>
          <lastmod>2022-08-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
