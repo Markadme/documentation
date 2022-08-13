@@ -1,11 +1,11 @@
-site_name: documentation
+site_name: MFR Driverless Documentation
 site_url: https://markadme.github.io/documentation/
 nav:
-    - Home: index.md
-    - Version 1.x:
-        - Types:
-            - Comments: v1/types/comments.md
-            - Posts: v1/types/posts.md
+    - General:
+        - Guidelines: general/Guidelines.md
+        - Framework: general/Framework.md
+    - Vehicle navigation:
+        - Overview: vehicle-navigation/Overview.md
 
 
 theme: readthedocs
