@@ -16,3 +16,11 @@ The primary goals of the framework are:
 ![Framework Architecture](img/frameworkArchitecture.png)
 
 ## Basic datastream
+
+![Basic Datastream](img/basicDatastream.png)
+
+## Standard call sequences
+
+### Registration
+
+### Pipeline call
