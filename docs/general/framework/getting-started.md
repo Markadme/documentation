@@ -135,8 +135,42 @@ manager.start()
 
 ### Data recording
 
+```python
+import driverless_framework.architecture as a
+import driverless_framework.architecture.basic_nodes as b
+
+manager = a.ManagerBuilder(b.Player("<path>", loop=True), b.Recorder("<path>")) \
+    .addProcessorNode(Processor()) \
+    .build()
+
+manager.start()
+```
+
+- `loop` loop means that when the end of the recording is reached, it is played again from the beginning.
+
+&nbsp;
+
 ### Global variables
+
+```python
+self._publish(DataID.TEST_DATA3, ..., globalVariable=True)
+```
+
+> **_ℹ INFO:_**  Global variables are multithreading safe for calling in ros. The last value entered is always used. This allows data from nodes further down the pipeline to be sent to nodes further up the pipeline, which can retrieve the data like a normal dataset on the next pipeline run.
+
+&nbsp;
 
 ---
 
 ## Testing
+
+The framework offers a testcontainer for testing purposes. Here a processor node can be called like a normal function. The method expects a DataGroup with all required data sets as attribute. The output is also a DataGroup.
+
+```python
+group = DataGroup(0)
+group.addData(DataID.TEST_DATA, DataField(<data>))
+group.addData(DataID.TEST_DATA2, DataField(<data>))
+
+output = TestContainer(Processor()).test(group) # Processor is the Node to test
+out_data = output.getData(DataID.TEST_DATA3).data
+```
