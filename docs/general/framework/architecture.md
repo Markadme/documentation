@@ -23,4 +23,8 @@ The primary goals of the framework are:
 
 ### Registration
 
+![Registration Call](img/registrationCall.png)
+
 ### Pipeline call
+
+![Pipeline Call](img/pipelineCall.png)
