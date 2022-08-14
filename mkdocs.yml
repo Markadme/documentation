@@ -3,7 +3,9 @@ site_url: https://markadme.github.io/documentation/
 nav:
     - General:
         - Guidelines: general/Guidelines.md
-        - Framework: general/Framework.md
+        - Framework:
+            - Getting started: general/framework/getting-started.md
+            - Architecture: general/framework/architecture.md
     - Vehicle navigation:
         - Overview: vehicle-navigation/Overview.md
 
