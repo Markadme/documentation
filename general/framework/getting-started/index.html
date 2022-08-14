@@ -223,9 +223,36 @@ manager.start()
 <hr />
 <h2 id="special-functions">Special functions</h2>
 <h3 id="data-recording">Data recording</h3>
+<pre><code class="language-python">import driverless_framework.architecture as a
+import driverless_framework.architecture.basic_nodes as b
+
+manager = a.ManagerBuilder(b.Player(&quot;&lt;path&gt;&quot;, loop=True), b.Recorder(&quot;&lt;path&gt;&quot;)) \
+    .addProcessorNode(Processor()) \
+    .build()
+
+manager.start()
+</code></pre>
+<ul>
+<li><code>loop</code> loop means that when the end of the recording is reached, it is played again from the beginning.</li>
+</ul>
+<p>&nbsp;</p>
 <h3 id="global-variables">Global variables</h3>
+<pre><code class="language-python">self._publish(DataID.TEST_DATA3, ..., globalVariable=True)
+</code></pre>
+<blockquote>
+<p><strong><em>ℹ INFO:</em></strong>  Global variables are multithreading safe for calling in ros. The last value entered is always used. This allows data from nodes further down the pipeline to be sent to nodes further up the pipeline, which can retrieve the data like a normal dataset on the next pipeline run.</p>
+</blockquote>
+<p>&nbsp;</p>
 <hr />
 <h2 id="testing">Testing</h2>
+<p>The framework offers a testcontainer for testing purposes. Here a processor node can be called like a normal function. The method expects a DataGroup with all required data sets as attribute. The output is also a DataGroup.</p>
+<pre><code class="language-python">group = DataGroup(0)
+group.addData(DataID.TEST_DATA, DataField(&lt;data&gt;))
+group.addData(DataID.TEST_DATA2, DataField(&lt;data&gt;))
+
+output = TestContainer(Processor()).test(group) # Processor is the Node to test
+out_data = output.getData(DataID.TEST_DATA3).data
+</code></pre>
               
             </div>
           </div><footer>
