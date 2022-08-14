@@ -146,7 +146,7 @@ manager = a.ManagerBuilder(b.Player("<path>", loop=True), b.Recorder("<path>")) 
 manager.start()
 ```
 
-- `loop` loop means that when the end of the recording is reached, it is played again from the beginning.
+- `loop` means that when the end of the recording is reached, it is played again from the beginning.
 
 &nbsp;
 
@@ -156,7 +156,13 @@ manager.start()
 self._publish(DataID.TEST_DATA3, ..., globalVariable=True)
 ```
 
-> **_ℹ INFO:_**  Global variables are multithreading safe for calling in ros. The last value entered is always used. This allows data from nodes further down the pipeline to be sent to nodes further up the pipeline, which can retrieve the data like a normal dataset on the next pipeline run.
+> **_ℹ INFO:_**  Global variables are multithreading safe for calling in ros. The last value entered is always used. This allows data from nodes further down the pipeline to be sent to nodes further up the pipeline, which can retrieve the data like a normal dataset on the next pipeline run. Global variables are declared via an extra enum that inherits from IGlobalDataID.
+
+&nbsp;
+
+### ALL DataID
+
+It is possible by importing the `BasicDataID` enum and specifying it in the node anotation (`BasicDataID.ALL`) to get all datasets that have already been requested by a previous node. This is mainly intended for recording the data or a possible publication in the ros bridge. Usually this is only used in an EndNode.
 
 &nbsp;
 
