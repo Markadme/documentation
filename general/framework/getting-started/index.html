@@ -66,6 +66,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#global-variables">Global variables</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#all-dataid">ALL DataID</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a>
@@ -233,15 +235,18 @@ manager = a.ManagerBuilder(b.Player(&quot;&lt;path&gt;&quot;, loop=True), b.Reco
 manager.start()
 </code></pre>
 <ul>
-<li><code>loop</code> loop means that when the end of the recording is reached, it is played again from the beginning.</li>
+<li><code>loop</code> means that when the end of the recording is reached, it is played again from the beginning.</li>
 </ul>
 <p>&nbsp;</p>
 <h3 id="global-variables">Global variables</h3>
 <pre><code class="language-python">self._publish(DataID.TEST_DATA3, ..., globalVariable=True)
 </code></pre>
 <blockquote>
-<p><strong><em>ℹ INFO:</em></strong>  Global variables are multithreading safe for calling in ros. The last value entered is always used. This allows data from nodes further down the pipeline to be sent to nodes further up the pipeline, which can retrieve the data like a normal dataset on the next pipeline run.</p>
+<p><strong><em>ℹ INFO:</em></strong>  Global variables are multithreading safe for calling in ros. The last value entered is always used. This allows data from nodes further down the pipeline to be sent to nodes further up the pipeline, which can retrieve the data like a normal dataset on the next pipeline run. Global variables are declared via an extra enum that inherits from IGlobalDataID.</p>
 </blockquote>
+<p>&nbsp;</p>
+<h3 id="all-dataid">ALL DataID</h3>
+<p>It is possible by importing the <code>BasicDataID</code> enum and specifying it in the node anotation (<code>BasicDataID.ALL</code>) to get all datasets that have already been requested by a previous node. This is mainly intended for recording the data or a possible publication in the ros bridge. Usually this is only used in an EndNode.</p>
 <p>&nbsp;</p>
 <hr />
 <h2 id="testing">Testing</h2>
