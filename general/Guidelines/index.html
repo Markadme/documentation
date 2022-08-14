@@ -112,17 +112,26 @@
 └── (windows_scripts)
 └── testing
 </code></pre>
-<p><code>doc</code> contains all files related to the documentation (Readme) \
-<code>src</code> contains the actual project files. Everything in this folder is declared to a package by the <code>__init__.py</code> to allow a uniform import \
-<code>src/nodes</code> Contains all modules that can be connected through the framework \
-<code>src/nodes/data_sources</code> Contains all data sources \
-<code>src/nodes/data_processors</code> Contains all data processors \
-<code>src/nodes/end_nodes</code> Contains all end nodes \
-<code>scripts</code> Contains all scripts that can be executed with ros \
-<code>launch</code> Contains all launch scripts for ros \
-<code>windows_scripts</code>  Contains all scripts that can be executed in windows without ros \
-<code>testing</code> Contains all testcases</p>
+<ul>
+<li><code>doc</code> contains all files related to the documentation (Readme)</li>
+<li><code>src</code> contains the actual project files. Everything in this folder is declared to a package by the <code>__init__.py</code> to allow a uniform import</li>
+<li><code>src/nodes</code> Contains all modules that can be connected through the framework</li>
+<li><code>src/nodes/data_sources</code> Contains all data sources</li>
+<li><code>src/nodes/data_processors</code> Contains all data processors</li>
+<li><code>src/nodes/end_nodes</code> Contains all end nodes</li>
+<li><code>scripts</code> Contains all scripts that can be executed with ros</li>
+<li><code>launch</code> Contains all launch scripts for ros</li>
+<li><code>windows_scripts</code>  Contains all scripts that can be executed in windows without ros</li>
+<li><code>testing</code> Contains all testcases</li>
+</ul>
 <h2 id="naming">Naming</h2>
+<ul>
+<li><code>Classes</code> and <code>files with classes</code> are named in CamelCase</li>
+<li><code>files with classes</code> will be named like the class</li>
+<li><code>files that consist only of methods</code> are named in snake_case</li>
+<li><code>variables</code> are named in snake_case</li>
+<li><code>methods</code> are named in CamelCase</li>
+</ul>
 <h2 id="git-guidelines">Git guidelines</h2>
 <p>?</p>
 <h2 id="testing">Testing</h2>
