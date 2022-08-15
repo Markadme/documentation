@@ -52,10 +52,26 @@
                 </li>
     </ul>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../general/interaction-of-the-projects/">Interaction of the projects</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Vehicle navigation</span></p>
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nodes">Nodes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#data-sources">Data Sources</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#processors">Processors</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#endnodes">EndNodes</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
               </ul>
       </div>
@@ -82,12 +98,124 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="overview">Overview</h1>
+<h2 id="architecture">Architecture</h2>
+<p><img alt="Navigation Structure" src="../img/navigation-structure.png" /></p>
+<p>&nbsp;</p>
+<hr />
+<h2 id="nodes">Nodes</h2>
+<h3 id="data-sources">Data Sources</h3>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th align="center">Description</th>
+<th align="right">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PythonSource</td>
+<td align="center">this module obtains its data directly from the simulator and publishes the requested data in the pipeline</td>
+<td align="right">DataID.LIDAR_DATA, DataID.ODOMETRY_DATA, DataID.REFEREE_STATE</td>
+</tr>
+<tr>
+<td>RosSource</td>
+<td align="center">this module obtains its data from the Ros Bridge and publishes the requested data in the pipeline</td>
+<td align="right">DataID.LIDAR_DATA, DataID.ODOMETRY_DATA</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h3 id="processors">Processors</h3>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th align="center">Description</th>
+<th align="center">Input</th>
+<th align="right">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ActionProcessor</td>
+<td align="center">This module calculates the control data necessary to follow the driving profile</td>
+<td align="center">DataID.TRACKPOINT_MAP, DataID.ODOMETRY_DATA, DataID.Z_ORIENTATION, DataID.VECTORCHAIN_FINISHED, DataID.MIN_CURVE_PATH, DataID.VELOCITY_PROFILE</td>
+<td align="right">DataID.STEERING_DATA, DataID.THROTTLE_DATA, DataID.BRAKE_DATA</td>
+</tr>
+<tr>
+<td>DataConverter</td>
+<td align="center">this module corrects the sensor position of the lidar and provisionally takes over the preclustering of the current data</td>
+<td align="center">DataID.LIDAR_DATA, DataID.ODOMETRY_DATA</td>
+<td align="right">DataID.Z_ORIENTATION, DataID.CONE_DATA</td>
+</tr>
+<tr>
+<td>MapBuilder</td>
+<td align="center">this module creates a map based on the relative coordinates of the cones</td>
+<td align="center">DataID.CONE_DATA, DataID.ODOMETRY_DATA, DataID.Z_ORIENTATION, DataID.REFEREE_STATE</td>
+<td align="right">DataID.CONE_MAP</td>
+</tr>
+<tr>
+<td>PathPlanner</td>
+<td align="center">this module calculates the racing line once after the first lap in a new thread</td>
+<td align="center">DataID.TRACKPOINT_MAP, DataID.VECTORCHAIN_FINISHED</td>
+<td align="right">DataID.MIN_CURVE_PATH</td>
+</tr>
+<tr>
+<td>PathPlanningConverter</td>
+<td align="center">This module deals with the conversion of the recorded map for further processing. This is only needed for testing purposes.</td>
+<td align="center">DataID.CONE_MAP</td>
+<td align="right">DataID.CONE_MAP</td>
+</tr>
+<tr>
+<td>RecordingSelector</td>
+<td align="center">This module is used to select the data sets to be recorded</td>
+<td align="center">DataID.LIDAR_DATA, DataID.ODOMETRY_DATA</td>
+<td align="right">-</td>
+</tr>
+<tr>
+<td>TrackDetector</td>
+<td align="center">this module deals with the recognition of the track and its boundaries</td>
+<td align="center">DataID.CONE_MAP</td>
+<td align="right">DataID.YELLOW_BORDER, DataID.BLUE_BORDER, DataID.TRACKPOINT_MAP, DataID.VECTORCHAIN_FINISHED</td>
+</tr>
+<tr>
+<td>VelocityPlanner</td>
+<td align="center">This module calculates a velocity profile for the corresponding track, under consideration of the car's limitations</td>
+<td align="center">DataID.MIN_CURVE_PATH</td>
+<td align="right">DataID.VELOCITY_PROFILE</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h3 id="endnodes">EndNodes</h3>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th align="center">Description</th>
+<th align="right">Input</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PathVisualizer</td>
+<td align="center">This module displays the conemap and the corresponding racing line with speed values</td>
+<td align="right">DataID.TRACKPOINT_MAP, DataID.VECTORCHAIN_FINISHED, DataID.CONE_MAP, DataID.VELOCITY_PROFILE</td>
+</tr>
+<tr>
+<td>PythonController</td>
+<td align="center">This module transmits the control data to the simulator</td>
+<td align="right">DataID.STEERING_DATA, DataID.THROTTLE_DATA,DataID.BRAKE_DATA</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../general/framework/architecture/" class="btn btn-neutral float-left" title="Architecture"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../general/interaction-of-the-projects/" class="btn btn-neutral float-left" title="Interaction of the projects"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -110,7 +238,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../general/framework/architecture/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../general/interaction-of-the-projects/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>
