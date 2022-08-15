@@ -6,6 +6,7 @@ nav:
         - Framework:
             - Getting started: general/framework/getting-started.md
             - Architecture: general/framework/architecture.md
+        - Interaction of the projects: general/interaction-of-the-projects.md
     - Vehicle navigation:
         - Overview: vehicle-navigation/Overview.md
 
